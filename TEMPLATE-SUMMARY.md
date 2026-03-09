@@ -1,8 +1,9 @@
 # AI-Driven Project Template - Summary
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Purpose:** Quick overview of the template
 **Created:** November 2025
+**Updated:** March 2026
 
 ---
 
@@ -43,6 +44,9 @@ project-template/
 │   └── 06-project/                 # Project management
 │
 ├── templates/                       # Reusable templates
+│   ├── mobile-module-breakdown.md   # Module spec template (data/domain/UI/QA/API)
+│   ├── sprint-ticket-template.md    # User story ticket format
+│   └── api-reference-template.md    # Central API reference doc structure
 ├── .github/                         # GitHub integration
 ├── scripts/                         # Automation scripts
 │
@@ -180,6 +184,13 @@ Layer 3 (Work-Specific):
 - C4 Model diagram structure
 - Architecture summary document
 - Decision tracking
+
+### **5. Mobile Project Support** *(v1.1.0)*
+- Module breakdown template (data / domain / UI / QA / API Mapping layers)
+- Figma review workflow (designs → developer-ready specs)
+- Backend API mapping workflow (codebase → documented endpoints)
+- Sprint ticket template (user story format, business AC)
+- API reference template (central endpoint documentation)
 
 ---
 
@@ -454,8 +465,8 @@ Recommendation: [Would you recommend? Why?]
 
 ---
 
-**Template Version:** 1.0.0
-**Last Updated:** November 2025
+**Template Version:** 1.1.0
+**Last Updated:** March 2026
 **Status:** Production Ready
 **License:** MIT (or as needed)
 **Maintained By:** Community

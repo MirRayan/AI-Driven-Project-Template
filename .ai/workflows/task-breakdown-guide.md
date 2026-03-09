@@ -528,11 +528,65 @@ Before starting work:
 - Learn from forgotten tasks
 - Adjust breakdown method by work type
 
+## Parallel Agent Execution
+
+When working with AI agents (e.g. Claude Code with subagents), you can dramatically speed up work by identifying tasks that can run simultaneously.
+
+### Identifying Parallelisable Tasks
+
+Tasks can run in parallel when they:
+- Write to **different files** (no shared file conflicts)
+- Have **no dependency** on each other's output
+- Are **independent units of work** (e.g. updating 5 separate module files)
+
+Tasks must be **sequential** when:
+- Task B needs the output of Task A
+- Both tasks write to the **same file**
+- A shared resource is involved (same DB, same branch)
+
+### Parallel Breakdown Pattern
+
+```
+Instead of:
+  Task 1 → wait → Task 2 → wait → Task 3 → wait → Task 4
+
+Do:
+  [ Task 1 | Task 2 | Task 3 | Task 4 ] → all complete → done
+```
+
+**Real example — updating 17 module docs:**
+```
+Sequential (slow):  Update module 1 → 2 → 3 → ... → 17  (~34 steps)
+Parallel (fast):    Agent A: modules 1–6
+                    Agent B: modules 7–12       → all run at once
+                    Agent C: modules 13–17
+```
+
+### When to Split Work Across Agents
+
+| Scenario | Approach |
+|----------|----------|
+| Update N independent files | Split across N agents |
+| Research + implementation | Research agent first, then implement |
+| Multiple modules with same change pattern | One agent per group of modules |
+| Read then write same file | Must be sequential — one agent |
+
+### Tips
+
+- Give each agent a **clear, self-contained task** with all context it needs
+- Agents do not share context — each must receive its full instructions
+- Run background agents for long tasks; foreground agents when you need the result before proceeding
+- After parallel agents complete, do a single review pass to ensure consistency
+
+---
+
 ## Related Workflows
 
 - **[decision-making-protocol.md](decision-making-protocol.md)** - Decision workflow includes task breakdown
 - **[architecture-review-checklist.md](architecture-review-checklist.md)** - Review as final task
 - **[pending-decision-workflow.md](pending-decision-workflow.md)** - Managing PDRs as tasks
+- **[figma-review-workflow.md](figma-review-workflow.md)** - Breaking down Figma review work
+- **[backend-api-mapping-workflow.md](backend-api-mapping-workflow.md)** - Breaking down API mapping work
 
 ## Tools & Integration
 

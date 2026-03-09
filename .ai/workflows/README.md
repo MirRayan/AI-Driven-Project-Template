@@ -19,7 +19,11 @@ Workflows document **how to work** with AI assistants effectively, not **what to
 
 ### 2. Quality Assurance
 - **[architecture-review-checklist.md](architecture-review-checklist.md)** - Pre-commit review process for architecture changes
-- **[task-breakdown-guide.md](task-breakdown-guide.md)** - Breaking complex work into trackable tasks
+- **[task-breakdown-guide.md](task-breakdown-guide.md)** - Breaking complex work into trackable tasks (includes parallel agent execution)
+
+### 3. Design & API (Mobile / Product)
+- **[figma-review-workflow.md](figma-review-workflow.md)** - Processing Figma deliveries into developer-ready module specs
+- **[backend-api-mapping-workflow.md](backend-api-mapping-workflow.md)** - Exploring a backend codebase and documenting APIs per module
 
 ## When to Use These Workflows
 
@@ -29,6 +33,8 @@ Workflows document **how to work** with AI assistants effectively, not **what to
 | **Decision Making Protocol** | When finalizing pending decisions | Accepted ADRs |
 | **Architecture Review** | Before committing major architecture changes | Review checklist |
 | **Task Breakdown** | Starting complex multi-step work | Todo list |
+| **Figma Review** | When Figma designs arrive for a module | Updated module breakdown files |
+| **Backend API Mapping** | When backend codebase is available and APIs are undocumented | API mapping sections in module files |
 
 ## Workflow Lifecycle
 
