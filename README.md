@@ -1,6 +1,6 @@
 # AI-Driven Project Template
 
-**Version:** 1.0.0
+**Version:** 1.2.0
 **Created:** November 2025
 **Purpose:** Universal template for AI-driven software development with zero context loss
 
@@ -14,6 +14,21 @@ This template is designed for projects where:
 - **Documentation is always current** and synchronized with code
 - **Architecture is well-defined** and consistently followed
 - **Quality is maintained** through automated checks and guidelines
+
+### Documentation consistency (all agents, all stacks)
+
+This template includes a **generic** policy usable by any tool or team:
+
+- **[AGENTS.md](AGENTS.md)** — Short, platform-neutral rules (index + ADRs + git as source of truth).
+- **[docs/05-breakdown/backend/BACKEND-INDEX.md](docs/05-breakdown/backend/BACKEND-INDEX.md)** — **API readiness registry** (`api:*` IDs). Single source of truth for which endpoints are **verified** / **pending** / **not_deployed**; module docs reference IDs only.
+- **[docs/process/AGENT-RULES-BACKEND-API.md](docs/process/AGENT-RULES-BACKEND-API.md)** — Rule A / B for any agent (read index before API work; update index when contracts change).
+- **[docs/process/PR-CHECKLIST.md](docs/process/PR-CHECKLIST.md)** — PR checklist when docs or API clients change.
+- **[docs/process/DOCUMENTATION-SYNC.md](docs/process/DOCUMENTATION-SYNC.md)** — Light vs quarterly deep pass.
+- **[scripts/check-doc-links.sh](scripts/check-doc-links.sh)** — Internal links only (`lychee --offline`).
+- **[scripts/verify-project-docs.sh](scripts/verify-project-docs.sh)** — Orchestrated checks (links + ADR index if `docs/03-architecture/decisions/` exists); **extend** for your project.
+- **Optional:** [`.cursor/rules/backend-api-registry.mdc`](.cursor/rules/backend-api-registry.mdc) — points agents to `AGENT-RULES-BACKEND-API.md` (not a second copy of the rules).
+
+Copy these files unchanged into new projects; add stack-specific rules only in `.ai/AI-ASSISTANT-RULES.md`. Add a GitHub Action for docs only if your team wants automated checks.
 
 ---
 
@@ -677,7 +692,7 @@ Before using template, ensure:
 
 ---
 
-**Template Version:** 1.0.0
+**Template Version:** 1.2.0
 **Last Updated:** November 2025
 **Maintained By:** AI-Driven Development Team
 **License:** MIT (adapt as needed)

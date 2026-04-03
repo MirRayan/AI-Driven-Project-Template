@@ -268,6 +268,7 @@ After initialization completes, verify:
 - [ ] `QUICK-START.md` generated
 - [ ] Contains correct project name
 - [ ] Next steps clearly listed
+- [ ] If the project uses HTTP APIs: `docs/05-breakdown/backend/BACKEND-INDEX.md` is present (from template); fill rows as endpoints are verified
 
 **Command to verify:**
 ```bash

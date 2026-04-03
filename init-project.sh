@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # AI-Driven Project Template - Initialization Script
-# Version: 1.0.0
+# Version: 1.2.0
 # Usage: ./init-project.sh <project-name>
 
 set -e
@@ -128,7 +128,7 @@ cd "$PROJECT_DIR"
 mkdir -p .ai/{context/{services,features},prompts/{code-generation,testing,debugging,refactoring,documentation},tools}
 
 # Create docs directories
-mkdir -p docs/{01-getting-started,02-guides/{development,deployment,operations},03-architecture/{decisions,diagrams/{c4/{01-context,02-container,03-component,04-code},sequence,data-flow,deployment}},04-reference/{api,database,configuration},05-product/{features,user-stories},06-project/{planning,meetings,retrospectives,metrics}}
+mkdir -p docs/{process,05-breakdown/backend,01-getting-started,02-guides/{development,deployment,operations},03-architecture/{decisions,diagrams/{c4/{01-context,02-container,03-component,04-code},sequence,data-flow,deployment}},04-reference/{api,database,configuration},05-product/{features,user-stories},06-project/{planning,meetings,retrospectives,metrics}}
 
 # Create other directories
 mkdir -p templates/{service-template,feature-template}
@@ -164,7 +164,7 @@ print_success "Git repository initialized"
 # Step 7: Create initial commit
 print_info "[7/8] Creating initial commit..."
 git add .
-git commit -m "Initial project setup from AI-Driven Template v1.0.0
+git commit -m "Initial project setup from AI-Driven Template v1.2.0
 
 Project: $PROJECT_NAME_TITLE
 Template: AI-Driven Project Template
@@ -193,7 +193,7 @@ cat > QUICK-START.md << EOF
 
 **Project:** ${PROJECT_NAME_TITLE}
 **Created:** $(date +%Y-%m-%d)
-**Template:** AI-Driven Project Template v1.0.0
+**Template:** AI-Driven Project Template v1.2.0
 
 ---
 
@@ -240,6 +240,12 @@ cat > QUICK-START.md << EOF
 - Code standards
 \`\`\`
 
+**D. Backend API registry (if you expose or consume HTTP APIs)**
+\`\`\`bash
+# Edit docs/05-breakdown/backend/BACKEND-INDEX.md — add rows as endpoints are verified.
+# Follow docs/process/AGENT-RULES-BACKEND-API.md (all agents).
+\`\`\`
+
 ### 2. Test with AI (5 minutes)
 
 \`\`\`markdown
@@ -282,9 +288,11 @@ ${PROJECT_NAME_KEBAB}/
 ## 📚 Key Documents
 
 **Must Read:**
-1. [PROJECT-INDEX.md](PROJECT-INDEX.md) - Master index
-2. [.ai/context/project-overview.md](.ai/context/project-overview.md) - Complete context
-3. [.ai/AI-ASSISTANT-RULES.md](.ai/AI-ASSISTANT-RULES.md) - AI rules
+1. [AGENTS.md](AGENTS.md) - Doc sync policy (all tools)
+2. [PROJECT-INDEX.md](PROJECT-INDEX.md) - Master index
+3. [.ai/context/project-overview.md](.ai/context/project-overview.md) - Complete context
+4. [.ai/AI-ASSISTANT-RULES.md](.ai/AI-ASSISTANT-RULES.md) - AI rules
+5. [docs/05-breakdown/backend/BACKEND-INDEX.md](docs/05-breakdown/backend/BACKEND-INDEX.md) - API readiness (if you use HTTP APIs)
 
 **Reference:**
 - [CONTEXT-RECOVERY.md](CONTEXT-RECOVERY.md) - Recover context

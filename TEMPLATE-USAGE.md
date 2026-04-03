@@ -62,7 +62,15 @@ Fill in all sections:
 - Success Criteria: How to measure success?
 ```
 
-**C. .ai/AI-ASSISTANT-RULES.md**
+**C. AGENTS.md, DOCUMENTATION-SYNC, backend API registry**
+```markdown
+Keep as-is for the generic documentation-sync policy (all AI tools, any stack).
+- BACKEND-INDEX.md + AGENT-RULES-BACKEND-API.md ship with the template: fill rows as you verify endpoints.
+- Only add a short pointer in AGENTS.md if your master index is not named PROJECT-INDEX.md.
+- Remove or ignore docs/05-breakdown/backend/ if the project has no HTTP API surface.
+```
+
+**D. .ai/AI-ASSISTANT-RULES.md**
 ```markdown
 Customize:
 - ALWAYS rules → Add project-specific rules
@@ -70,6 +78,7 @@ Customize:
 - Architecture constraints → Your patterns
 - Code standards → Your style preferences
 - Red flags → Your project's danger zones
+- Keep the built-in pointers to AGENTS.md and DOCUMENTATION-SYNC.md
 ```
 
 ### **Step 3: Remove Example Content (2 minutes)**

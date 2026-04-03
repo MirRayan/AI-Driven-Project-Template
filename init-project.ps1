@@ -1,5 +1,5 @@
 # AI-Driven Project Template - Initialization Script (PowerShell)
-# Version: 1.0.0
+# Version: 1.2.0
 # Usage: .\init-project.ps1 -ProjectName "My Project Name"
 
 param(
@@ -126,6 +126,8 @@ $aiDirs | ForEach-Object { New-Item -ItemType Directory -Path $_ -Force | Out-Nu
 
 # Create docs directories
 $docDirs = @(
+    "docs/process",
+    "docs/05-breakdown/backend",
     "docs/01-getting-started",
     "docs/02-guides/development",
     "docs/02-guides/deployment",
@@ -195,7 +197,7 @@ git add .
 
 $commitDate = Get-Date -Format "yyyy-MM-dd"
 $commitMessage = @"
-Initial project setup from AI-Driven Template v1.0.0
+Initial project setup from AI-Driven Template v1.2.0
 
 Project: $PROJECT_NAME_TITLE
 Template: AI-Driven Project Template
@@ -226,7 +228,7 @@ $quickStartContent = @"
 
 **Project:** ${PROJECT_NAME_TITLE}
 **Created:** $commitDate
-**Template:** AI-Driven Project Template v1.0.0
+**Template:** AI-Driven Project Template v1.2.0
 
 ---
 

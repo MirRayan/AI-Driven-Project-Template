@@ -1,6 +1,6 @@
 # AI-Driven Project Template - Summary
 
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Purpose:** Quick overview of the template
 **Created:** November 2025
 **Updated:** March 2026
@@ -23,6 +23,14 @@ A **universal template** for AI-driven software development that ensures:
 ```
 project-template/
 ├── ⭐ PROJECT-INDEX.md              # Start here always
+├── ⭐ AGENTS.md                     # Agent-agnostic doc sync (all tools)
+├── docs/05-breakdown/backend/BACKEND-INDEX.md  # API readiness registry (api:* IDs)
+├── docs/process/AGENT-RULES-BACKEND-API.md  # Rule A/B — all agents
+├── docs/process/PR-CHECKLIST.md    # PR checklist (docs + API)
+├── docs/process/DOCUMENTATION-SYNC.md  # Light + quarterly deep pass
+├── .cursor/rules/backend-api-registry.mdc  # Optional Cursor pointer to agent rules
+├── scripts/check-doc-links.sh       # Internal links (lychee --offline)
+├── scripts/verify-project-docs.sh   # Orchestrated checks — extend per project
 ├── ⭐ CONTEXT-RECOVERY.md           # How to recover context
 ├── ⭐ AI-SESSION-GUIDE.md           # How to work with AI
 ├── TEMPLATE-USAGE.md                # How to use this template
@@ -44,7 +52,7 @@ project-template/
 │   └── 06-project/                 # Project management
 │
 ├── templates/                       # Reusable templates
-│   ├── mobile-module-breakdown.md   # Module spec template (data/domain/UI/QA/API)
+│   ├── mobile-module-breakdown.md   # Module spec template (rename to module-breakdown.md in your project if preferred)
 │   ├── sprint-ticket-template.md    # User story ticket format
 │   └── api-reference-template.md    # Central API reference doc structure
 ├── .github/                         # GitHub integration
@@ -67,25 +75,36 @@ project-template/
 - **Contains:** Quick facts, status, metrics, navigation
 - **Update:** After major changes
 
-### **2. CONTEXT-RECOVERY.md**
+### **2. AGENTS.md**
+- **Load in:** When editing docs or architecture (any AI tool)
+- **Purpose:** Generic documentation sync — not tied to a language or framework
+- **Contains:** Index + git truth, pointers to `DOCUMENTATION-SYNC.md`
+- **Update:** Rarely; project specifics go in `.ai/AI-ASSISTANT-RULES.md`
+
+### **2b. docs/05-breakdown/backend/BACKEND-INDEX.md** *(when using HTTP APIs)*
+- **Load in:** Before implementing or changing API client / repository code
+- **Purpose:** Single registry of endpoint readiness (`api:*` IDs)
+- **Procedure:** `docs/process/AGENT-RULES-BACKEND-API.md` (all agents)
+
+### **3. CONTEXT-RECOVERY.md**
 - **Load when:** Starting new session or after context loss
 - **Purpose:** How to restore full context
 - **Contains:** Recovery procedures, verification steps
 - **Update:** When recovery process improves
 
-### **3. AI-SESSION-GUIDE.md**
+### **4. AI-SESSION-GUIDE.md**
 - **Load when:** Learning how to work with AI
 - **Purpose:** Best practices for AI collaboration
 - **Contains:** Session types, templates, workflows
 - **Update:** When discovering better approaches
 
-### **4. .ai/AI-ASSISTANT-RULES.md**
+### **5. .ai/AI-ASSISTANT-RULES.md**
 - **Load in:** Every session (always)
 - **Purpose:** Non-negotiable rules for AI
 - **Contains:** ALWAYS/NEVER rules, constraints, standards
 - **Update:** When adding project-specific rules
 
-### **5. .ai/context/project-overview.md**
+### **6. .ai/context/project-overview.md**
 - **Load in:** Every session (always)
 - **Purpose:** Complete project context
 - **Contains:** Vision, architecture, tech stack, constraints
