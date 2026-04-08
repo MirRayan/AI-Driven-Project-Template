@@ -6,6 +6,25 @@
 
 ---
 
+## What exists (template defaults) — tiered context (no wasted tokens)
+
+**Goal:** Keep context **complete** and **optimized** without duplicating information across many files or loading empty placeholder folders.
+
+| Tier | What to load | Why | When to update |
+|------|--------------|-----|----------------|
+| **1 — Always hot** | `PROJECT-INDEX.md` + `.ai/context/project-overview.md` + `.ai/AI-ASSISTANT-RULES.md` | Fast recovery for any session | Update when meaning changes (phase/status/constraints/stack) |
+| **1b — If your project has HTTP APIs** | `docs/05-breakdown/backend/BACKEND-INDEX.md` + relevant `docs/04-reference/` pages | Single truth for endpoint readiness/contracts | Update when endpoint contract/readiness changes |
+| **2 — Decisions & architecture** | `docs/03-architecture/decisions/README.md` (if present) + diagrams policy | Avoid re-litigating decisions | Update when ADRs/diagrams change |
+| **3 — Canonical feature depth** | `docs/05-breakdown/modules/` (or your chosen feature breakdown path) + `docs/02-specification/` | “The details live here” | Update with feature work; not every PR |
+| **4 — Optional overlays** | `.ai/context/services/{service}.md` | Only if you create service boundary summaries | Add only when helpful; keep short |
+| **5 — Prompt folders** | `.ai/prompts/*` | Reusable prompts only if your team adds them | **Do not load** unless files exist |
+
+**Rules of thumb**
+- Prefer **one canonical write-up** over copying the same facts into many files.
+- Treat empty folders as **optional extension points**, not required context.
+
+---
+
 ## 🚨 **Emergency Context Recovery (60 seconds)**
 
 If you need context IMMEDIATELY:
@@ -39,10 +58,10 @@ Ask AI to confirm:
 - Key constraints?
 
 ### Step 3: Load Work-Specific (60 seconds)
-**If coding:** `.ai/context/services/{current-service}.md`
-**If planning:** `docs/05-product/roadmap.md`
-**If debugging:** `.ai/prompts/debugging/` + error logs
-**If architecting:** `docs/03-architecture/architecture-summary.md`
+**If coding:** the relevant feature/module doc under `docs/05-breakdown/modules/` (or your repo’s chosen breakdown path). Optional: `.ai/context/services/{service}.md` **only if it exists**.
+**If planning:** your sprint/roadmap doc **if your repo has one** (do not assume a specific path).
+**If debugging:** error logs + the relevant module/spec + API docs. Do **not** load `.ai/prompts/debugging/` unless your repo contains prompt files.
+**If architecting:** `docs/03-context/` and `docs/03-architecture/decisions/` (and diagrams policy) **if present**.
 
 ---
 
@@ -56,18 +75,18 @@ Ask AI to confirm:
    - Note: What's completed, in-progress, pending
    - Check: Last updated date
 
-2. **CHANGELOG.md** (1 min)
-   - Read: Recent changes
-   - Note: What happened since last session
+2. **Git history / master index** (1 min)
+   - Use `git log` and/or the project index to understand recent changes
+   - Avoid maintaining a separate changelog unless your team commits to it
 
 ### Phase 2: Architecture (4 minutes)
 3. **.ai/context/project-overview.md** (2 min)
    - Read: Complete overview
    - Note: Architecture, tech stack, constraints
 
-4. **docs/03-architecture/architecture-summary.md** (2 min)
-   - Read: Detailed architecture
-   - Note: Service boundaries, patterns, decisions
+4. **ADRs + architecture context** (2 min)
+   - Read: ADR index (`docs/03-architecture/decisions/README.md`) if present
+   - Note: Decisions, constraints, patterns
 
 ### Phase 3: Current Work (3 minutes)
 5. **Relevant Context Files** (2 min)
@@ -75,9 +94,8 @@ Ask AI to confirm:
    - Feature specs if implementing
    - Bug reports if debugging
 
-6. **.ai/session-memory.md** (1 min)
-   - Read: Recent sessions
-   - Note: What was done, what's next
+6. **Optional session notes** (1 min)
+   - Only if your repo maintains them; otherwise rely on the index + git history
 
 ---
 
@@ -90,13 +108,12 @@ Ask AI to confirm:
 Required:
 1. PROJECT-INDEX.md
 2. .ai/context/project-overview.md
-3. .ai/context/architecture-context.md
 4. .ai/AI-ASSISTANT-RULES.md
 
 Feature-Specific:
-5. docs/05-product/features/{feature-name}.md
-6. .ai/context/services/{affected-service}.md
-7. .ai/prompts/code-generation/
+5. docs/05-breakdown/modules/{module}.md (or `docs/02-specification/` as your canonical spec)
+6. Optional: `.ai/context/services/{affected-service}.md` **only if it exists**
+7. Do **not** load `.ai/prompts/code-generation/` unless your repo contains prompt files
 
 Context Verification:
 - Confirm feature requirements understood
@@ -114,8 +131,8 @@ Required:
 3. .ai/AI-ASSISTANT-RULES.md
 
 Bug-Specific:
-4. .ai/context/services/{affected-service}.md
-5. .ai/prompts/debugging/
+4. Relevant module/spec doc for the affected area
+5. Optional: `.ai/context/services/{affected-service}.md` **only if it exists**
 6. Recent error logs
 7. Related tests
 
@@ -132,8 +149,8 @@ Context Verification:
 Required:
 1. PROJECT-INDEX.md
 2. .ai/context/project-overview.md
-3. docs/03-architecture/architecture-summary.md
-4. docs/03-architecture/decisions/README.md
+3. docs/03-architecture/decisions/README.md (if present)
+4. docs/03-context/ (if present)
 
 Planning-Specific:
 5. Recent ADRs
@@ -174,14 +191,12 @@ Context Verification:
 Required:
 1. PROJECT-INDEX.md
 2. .ai/context/project-overview.md
-3. .ai/context/architecture-context.md
 4. .ai/AI-ASSISTANT-RULES.md
 
 Refactoring-Specific:
 5. Current code to refactor
-6. Service context
+6. Relevant module/spec + ADRs as needed
 7. Test suite
-8. .ai/prompts/refactoring/
 
 Context Verification:
 - Confirm refactoring goals clear
@@ -206,9 +221,9 @@ Ask AI: "Summarize current task and progress"
 ### **After Topic Change:**
 ```markdown
 Reload:
-1. New topic context file
-2. Related service/feature context
-3. Relevant prompts
+1. Relevant module/spec doc for the new topic
+2. PROJECT-INDEX.md current work if scope shifted
+3. Optional: `.ai/context/services/{service}.md` only if it exists
 
 Ask AI: "Confirm understanding of new task"
 ```
@@ -339,7 +354,7 @@ Layer 1 (Must Read - 3 min):
 
 Layer 2 (If Needed - 5 min):
 - project-overview.md
-- architecture-summary.md
+- ADR index + relevant architecture docs under `docs/03-architecture/` / `docs/03-context/` (if present)
 
 Layer 3 (Task-Specific - 3 min):
 - Service/feature context
@@ -363,9 +378,9 @@ PROJECT-INDEX.md (Master - Always Load)
     ↓
     ├→ .ai/context/project-overview.md (Complete Context)
     │     ↓
-    │     ├→ architecture-context.md (Architecture)
-    │     ├→ tech-stack-context.md (Technologies)
-    │     └→ domain-model-context.md (Business Logic)
+    │     ├→ docs/03-architecture/decisions/README.md (Decisions, if present)
+    │     ├→ docs/03-context/ (Business/tech bridge, if present)
+    │     └→ docs/02-specification/ + docs/05-breakdown/ (Canonical requirements + breakdown)
     │
     ├→ .ai/AI-ASSISTANT-RULES.md (Rules)
     │     ↓
@@ -374,9 +389,9 @@ PROJECT-INDEX.md (Master - Always Load)
     │     └→ Security requirements
     │
     └→ Work-Specific Context
-          ├→ services/{service}.md
-          ├→ features/{feature}.md
-          └→ prompts/{category}/
+          ├→ docs/05-breakdown/modules/{module}.md (canonical, if present)
+          ├→ .ai/context/services/{service}.md (optional overlay, if created)
+          └→ docs/05-breakdown/backend/BACKEND-INDEX.md + docs/04-reference/ (API contracts, if applicable)
 ```
 
 ---
@@ -407,7 +422,7 @@ Keep in `.ai/context-recovery-log.md`:
 **Files Loaded:**
 1. PROJECT-INDEX.md
 2. project-overview.md
-3. architecture-summary.md
+3. ADR index (if present)
 4. menu-service.md
 
 **Verification:**
